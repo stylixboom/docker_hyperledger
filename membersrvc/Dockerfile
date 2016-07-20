@@ -7,9 +7,4 @@
 FROM stylix/hyperledger:latest
 MAINTAINER Siriwat K.
 
-RUN cd $GOPATH/src/github.com/hyperledger/fabric/membersrvc \
-        && CGO_CFLAGS=" " CGO_LDFLAGS="-lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" go install \
-        && cp membersrvc.yaml $GOPATH/bin \
-        && go clean
-
 CMD ["membersrvc"]
