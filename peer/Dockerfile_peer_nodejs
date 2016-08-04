@@ -1,0 +1,17 @@
+# Forked from https://github.com/yeasy/docker-hyperledger-peer:latest
+
+# Dockerfile for Hyperledger peer image. This actually follow hyperledger
+# image but to make sure the config is done.
+# Data is stored under /var/hyperledger/db and /var/hyperledger/production
+
+FROM stylix/hyperledger:latest
+MAINTAINER Siriwat K.
+
+# Node.js installation
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+        && apt-get install -y nodejs
+
+COPY ./param_daemon/client /param_daemon/client/
+COPY ./param_daemon/start_peer.sh /
+
+CMD ["peer","node","start"]

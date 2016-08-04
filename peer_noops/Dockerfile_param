@@ -1,0 +1,12 @@
+# Forked from https://github.com/yeasy/docker-hyperledger-peer:noops
+
+# Dockerfile for Hyperledger peer image with consensus noops. This follows hyperledger
+# image and copy related consensus config file.
+# Data is stored under /var/hyperledger/db and /var/hyperledger/production
+
+FROM stylix/hyperledger-peer:latest
+MAINTAINER Siriwat K.
+
+RUN cp $GOPATH/src/github.com/hyperledger/fabric/consensus/noops/config.yaml $GOPATH/bin
+
+CMD ["/start_peer.sh"]
