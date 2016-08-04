@@ -20,14 +20,8 @@ ENV all_proxy 'socks://10.136.0.56:8080'
 ENV http_proxy 'http://10.136.0.56:8080'
 ENV https_proxy 'https://10.136.0.56:8080'
 
-RUN echo "http_proxy=http://10.136.0.56:8080" >> /etc/environment \
-        && echo "https_proxy=https://10.136.0.56:8080" >> /etc/environment \
-        && echo "ftp_proxy=http://10.136.0.56:8080" >> /etc/environment \
-        && echo "no_proxy='localhost,127.0.0.1'" >> /etc/environment \
-        && echo "HTTP_PROXY=http://10.136.0.56:8080" >> /etc/environment \
-        && echo "HTTPS_PROXY=http://10.136.0.56:8080" >> /etc/environment \
-        && echo "FTP_PROXY=http://10.136.0.56:8080" >> /etc/environment \
-        && echo "NO_PROXY='localhost,127.0.0.1'" >> /etc/environment
+COPY ./environment /etc/
+COPY ./95proxies /etc/apt/apt.conf.d/
 
 RUN apt-get update \
         && apt-get install -y libsnappy-dev zlib1g-dev libbz2-dev \
