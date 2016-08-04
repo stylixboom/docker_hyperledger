@@ -1,0 +1,9 @@
+# Dockerfile for our customized MongoDB
+
+FROM mongo
+
+MAINTAINER Siriwat K.
+
+EXPOSE 10054
+
+CMD ["mongod","--port","10054"]
