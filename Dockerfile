@@ -40,10 +40,11 @@ RUN cd /tmp \
 RUN mkdir -p /var/hyperledger/db \
         && mkdir -p /var/hyperledger/production
 
-# install hyperledger
+# install hyperledger peer and membersrvc
 RUN mkdir -p $GOPATH/src/github.com/hyperledger \
         && cd $GOPATH/src/github.com/hyperledger \
-        && git clone --single-branch -b master --depth 1 https://github.com/hyperledger/fabric.git \
+#&& git clone --single-branch -b master --depth 1 https://github.com/hyperledger/fabric.git \
+        && git clone --single-branch -b master --depth 1 http://gerrit.hyperledger.org/r/fabric \
         && cd $GOPATH/src/github.com/hyperledger/fabric/peer \
         && CGO_CFLAGS=" " CGO_LDFLAGS="-lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" go install \
         && go clean \
@@ -57,5 +58,11 @@ RUN ln -s $GOPATH /opt/gopath
 
 # this is to keep compatible
 RUN PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:$PATH
+
+RUN rm /etc/apt/apt.conf.d/95proxies \
+        && rm /etc/environment \
+        && unset all_proxy \
+        && unset http_proxy \
+        && unset https_proxy
 
 WORKDIR $GOPATH/src/github.com/hyperledger/fabric
