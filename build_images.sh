@@ -7,7 +7,7 @@
 # # # # # # # # # # # # # # # # # # # #
 
 echo "======== Hyperledger ========" &&
-docker build -f Dockerfile_dockerclient -t stylix/hyperledger:latest . &&
+docker build -f Dockerfile -t stylix/hyperledger:latest . &&
 docker tag stylix/hyperledger:latest hyperledger/fabric-baseimage:latest &&
 echo "======== MongoDB ========" &&
 docker build -f mongodb/Dockerfile_mongo -t stylix/mongo-10054:latest . &&
@@ -20,11 +20,13 @@ docker build -f peer_noops/Dockerfile_param -t stylix/hyperledger-peer:noops . &
 echo "======== Peer-pbft + Node.js ========" &&
 docker build -f peer_pbft/Dockerfile_param -t stylix/hyperledger-peer:pbft . &&
 echo "======== Member service ========" &&
-docker build -f membersrvc/Dockerfile -t stylix/hyperledger-membersrvc .
+docker build -f membersrvc/Dockerfile -t stylix/hyperledger-membersrvc . &&
 
 #echo "======== Uploading ========" &&
-#docker push stylix/hyperledger:latest &&
-#docker push stylix/hyperledger-peer:latest &&
-#docker push stylix/hyperledger-peer:noops &&
-#docker push stylix/hyperledger-peer:pbft &&
-#docker push stylix/hyperledger-membersrvc
+docker push stylix/hyperledger:latest &&
+docker push stylix/hyperledger-peer:latest &&
+docker push stylix/hyperledger-peer:noops &&
+docker push stylix/hyperledger-peer:pbft &&
+docker push stylix/hyperledger-membersrvc:latest &&
+docker push stylix/hyperledger-param:latest &&
+docker push stylix/mongo-10054:latest
