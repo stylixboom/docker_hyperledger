@@ -82,3 +82,9 @@ RUN ln -s $GOPATH /opt/gopath
 RUN PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:$PATH
 
 WORKDIR $GOPATH/src/github.com/hyperledger/fabric
+
+RUN rm /etc/apt/apt.conf.d/95proxies \
+        && rm /etc/environment \
+        && unset all_proxy \
+        && unset http_proxy \
+        && unset https_proxy
