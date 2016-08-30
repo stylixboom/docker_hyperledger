@@ -11,7 +11,10 @@ MAINTAINER Siriwat K.
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
         && apt-get install -y nodejs
 
-COPY ./param_daemon/client /param_daemon/client/
+COPY ./param_daemon/client/client.js /param_daemon/client/client.js
+COPY ./param_daemon/client/hyram.js /param_daemon/client/hyram.js
+COPY ./param_daemon/client/send_heartbeat.js /param_daemon/client/send_heartbeat.js
+COPY ./param_daemon/client/node_modules /param_daemon/client/node_modules/
 COPY ./param_daemon/start_peer.sh /
 
 CMD ["peer","node","start"]
